@@ -62,10 +62,10 @@ $jom = Join-Path $jomInstallDir 'jom.exe'
 
 # download CMake
 Write-Host "Download CMake commandline tool"
-$cmakeBaseName = 'cmake-2.8.12.1-win32-x86'
+$cmakeBaseName = 'cmake-3.4.3-win32-x86'
 $cmakeArchiveName = $cmakeBaseName + '.zip'
 $cmakeInstallDir = Join-Path $destDir $cmakeBaseName
-$cmakeArchiveUrl = 'http://www.cmake.org/files/v2.8/' + $cmakeArchiveName
+$cmakeArchiveUrl = 'http://www.cmake.org/files/v3.4/' + $cmakeArchiveName
 $cmakeArchiveFile = Join-Path $destDir $cmakeArchiveName
 Download-File $cmakeArchiveUrl $cmakeArchiveFile
 
