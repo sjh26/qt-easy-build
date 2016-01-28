@@ -12,7 +12,7 @@ if(!($bits -match "^(32|64)$")){
   throw "'bits' variable incorrectly set to [$bits]. Hint: '32' or '64' value is expected."
 }
 
-$qtBuildScriptVersion = '6f59ca17b3bcc6b56fa636522dab6a862be0c856'
+$qtBuildScriptVersion = '2fdd4a869d4b82323b37efc543871d7ff17bb858'
 
 if (![System.IO.Directory]::Exists($destDir)) {[System.IO.Directory]::CreateDirectory($destDir)}
 
