@@ -72,9 +72,9 @@ make install
 
 # Prerequisites
 
-cmake=/Users/kitware/Dashboards/Support/CMake\ 2.8-12.app/Contents/bin/cmake
-deployment_target=10.6
-sysroot=/Developer/SDKs/MacOSX10.6.sdk
+cmake=/Applications/CMake.app/Contents/bin/cmake
+deployment_target=10.11
+sysroot=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk
 
 #cmake=/Volumes/Dashboards/Support/CMake\ 2.8-11.app/Contents/bin/cmake
 #deployment_target=10.8
@@ -90,7 +90,6 @@ mkdir zlib-build  && \
 git clone git://github.com/commontk/zlib.git  && \
 cd zlib-build  && \
 "$cmake" -DCMAKE_BUILD_TYPE:STRING=Release \
-       -DZLIB_MANGLE_PREFIX:STRING=slicer_zlib_ \
        -DCMAKE_INSTALL_PREFIX:PATH=$cwd/zlib-install \
        -DCMAKE_OSX_ARCHITECTURES=x86_64 \
        -DCMAKE_OSX_SYSROOT=$sysroot \
@@ -98,8 +97,10 @@ cd zlib-build  && \
        ../zlib && \
 make -j4 && \
 make install && \
-cp zlib-install/lib/libzlib.a zlib-install/lib/libz.a && \
-cd ..
+cd .. && \
+cp zlib-install/lib/libzlib.a zlib-install/lib/libz.a
+
+cd $cwd
 
 # Build OpenSSL
 
@@ -125,6 +126,7 @@ cd ..
 
 # Build Qt
 
+cd $cwd
 cwd=$(pwd)
 
 rm -f qt-everywhere-opensource-src-4.8.7.tar.gz
@@ -140,8 +142,9 @@ cd qt-everywhere-opensource-src-4.8.7 && \
 ./configure -prefix ../qt-everywhere-opensource-build-4.8.7/  \
   -release -opensource -confirm-license -no-qt3support        \
   -webkit -arch x86_64  -nomake examples -nomake demos        \
-  -sdk $sysroot                         \
+  -sdk $sysroot -shared -no-pch                       \
   -openssl -I $cwd/openssl-1.0.1h/include \
   -L $cwd/openssl-1.0.1h && \
 make -j7 && \
-make install
+make install && \
+echo "Done"
