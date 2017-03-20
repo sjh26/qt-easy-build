@@ -31,6 +31,8 @@ endif()
 message(STATUS "JOM_EXECUTABLE:${JOM_EXECUTABLE}")
 
 # Set compiler name based on Qt platform
+if(QT_PLATFORM STREQUAL "win32-msvc2015")
+  set(_compiler_name "vs2015")
 if(QT_PLATFORM STREQUAL "win32-msvc2013")
   set(_compiler_name "vs2013")
 elseif(QT_PLATFORM STREQUAL "win32-msvc2012")
